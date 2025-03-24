@@ -1,0 +1,462 @@
+Shell Scripting:
+
+
+all command is writen in single file. 
+type of shell : 1.Bash ( /bin/bash ) , 2.Zsh (/bin/zsh) , 3. Ksh(/bin/ksh), 4. Csh (!/bin/csh) .
+
+
+1. Comment in shell scripting:
+
+for single line commenct -->   # this is single line comment
+
+for multiple line commenct --> <<comment this 
+is 
+multi line 
+comment
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+2. Variable: 
+
+To define variable:  VAR_NAME=value , VAR_NAME=$(hostname)
+
+Example:
+
+a=10
+b="krishnamurari"
+age=24
+echo "my name is $b and age is $age"
+
+---------------------------------------------------------------------------------------------------------------------
+
+To keep the variable constant:
+
+#!/bin/bash
+
+readonly name="krishnamurari"
+
+echo "hello my name is $name" 
+
+---------------------------------------------------------------------------------------------------------------------
+
+
+#!/bin/bash 
+
+#read -p "Enter the name" username
+
+#sudo useradd -m  $username
+
+sudo userdel murari
+echo "User is add"
+
+---------------------------------------------------------------------------------------------------------------------
+
+Take the input form user:
+
+#!/bin/bash
+
+read -p "enter the value" value
+echo "the value is $value"
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+3. Argument: 
+
+Is the value which pass during the command run. 
+
+Sample 1:
+#!/bin/bash 
+
+echo "first arugment is $1"
+echo "second arugment is $2"
+echo "all arugment is $@"
+echo "total arugment is $#"
+
+./arugment.sh mohan shyam --> passing the arugment. 
+
+Output:
+first arugment is mohan
+second arugment is shyam
+all arugment is mohan shyam
+total arugment is 2
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+4. if else statement:
+
+
+Sampe 1:
+#!/bin/bash
+
+read -p "enter the name" name
+
+if [[ $name == "krishna" ]];
+then 
+    echo "hello $name "
+else 
+    echo "Not Valid data"
+fi
+
+Sample 2: 
+
+#!/bin/bash
+
+read -p "enter the mark" mark
+
+if [[ $mark -gt 40 ]]
+then 
+    echo "you are pass"
+else
+    echo "you are fail"
+fi
+
+
+Sample 3: 
+
+read -p "Enter the name: " name
+
+if [[ $name == "krishna" ]]; then
+    echo "Hello $name"
+elif [[ $name == "murari" ]]; then
+    echo "Hello $name, welcome!"
+else
+    echo "Not Valid data"
+fi 
+
+Sample 4: 
+
+#!/bin/bash
+
+read -p "Enter the mark: " mark
+
+if [[ $mark -ge 40 ]]; then
+    echo "You are pass"
+elif [[ $mark -ge 35 && $mark -lt 40 ]]; then
+    echo "Average mark"
+else
+    echo "You are fail"
+fi
+
+
+
+
+CASE 
+
+#!/bin/bash 
+
+echo " select the choice "
+echo " a to print data"
+echo " b for listing "
+echo " c for current location " 
+
+read value 
+
+case $value in 
+    a) date;;
+    b) ls -ltr ;;
+    c) pwd;;
+    *) echo "Not the valid input"
+esac
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+5. Logical Operator 
+
+Sample 1: 
+
+#!/bin/bash 
+
+age=18
+
+[[ $age -ge 18 ]] && echo "Adult" || echo "Minor"
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+6. for loop:
+
+Sample 1:
+
+ #!/bin/bash
+
+for item in Apple Banana Cherry; do
+  echo "Fruit: $item"
+done
+
+Sample 2:   
+
+#!/bin/bash
+
+for ((i=1; i<=5; i++)); do
+  echo "C-style Loop: $i"
+done
+
+Sample 3:
+
+#!/bin/bash 
+
+for i in a b c 
+do 
+    echo "$i"
+done
+
+
+
+Print the data from file:
+
+#!/bin/bash 
+
+file="/home/fluper/sh/file"
+
+for iteam in $( cat $file )
+do 
+    echo " the value for file name $iteam "
+done 
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+7. While Loop: 
+
+Sample 1: 
+
+#!/bin/bash
+
+i=1
+
+while [[ $i -le 10 ]]
+do 
+    echo " print the value $((2*i)) " 
+    (( i++ ))
+done 
+
+Sample 2: 
+
+#!/bin/bash
+
+i=1
+sum=0
+while [[ $i -le 10 ]]
+do 
+    sum=$((sum + i))
+    (( i++ ))
+done
+echo "Sum of first 10 numbers: $sum"
+
+Sample 3: 
+
+#!/bin/bash
+
+while true
+do 
+    echo "hello"
+    sleep 3s
+done 
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+8. Function : 
+
+Block of code which we can group and use any where. It can be reuse may time. 
+
+Sample 1:
+
+#!/bin/bash 
+
+add() { 
+    a=10
+    b=20
+    echo "Addition of two number $(($a+$b))"
+}
+
+add
+
+
+Sample 2:
+
+#!/bin/bash 
+
+check_even_odd() {
+    if [[ $(($1 % 2)) -eq 0 ]]; then
+        echo "$1 is Even"
+    else
+        echo "$1 is Odd"
+    fi
+}
+
+check_even_odd 7
+
+
+
+---------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+9. Addition think:
+
+
+1. Break --> to stop the loop. 
+
+#!/bin/bash 
+
+no=6 
+
+for iteam in 1 2 3 4 5 6 7 8 9 
+do 
+    if [[ $no -eq $iteam ]]
+    then 
+        echo "$no the number is found"
+        break
+    fi 
+    echo " the number is $iteam " 
+done 
+
+
+2. Continue --> skkip the number and run the entire code. it will only the skip the curent condtiong and rest code will be execute.
+
+#!/bin/bash 
+
+no=6 
+
+for iteam in 1 2 3 4 5 6 7 8 9 
+do 
+    if [[ $no -eq $iteam ]]
+    then 
+        echo "$no the number is found"
+        continue
+    fi 
+    echo " the number is $iteam " 
+done 
+
+
+3. Exit --> to stop the script with condition.
+
+/bin/bash
+
+if [[ $# -eq 0 ]]
+then 
+    echo " enter the arugment "
+    exit 1
+fi 
+
+echo " hello krishnamurari"
+echo " good morning"
+
+if we not pass the arugment then code will not run. 
+
+
+4. If we want to exit the script when an erro occur in scripting then we can use 
+    
+    -->    set -e   --> in starting of shell scripting after #!/bin/bash 
+    -->    set -x   --> it help to debug the shell scripting and check the command execution line by line 
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Erro Handling: with conditionl.
+
+#!/bin/bash 
+
+gitclone() {
+  echo " Clone the repo" 
+  git clone https://github.com/Krishnamurariyadav123/nginx-image.git
+  
+}
+
+
+depoly_code() {
+  echo " Depoly the code "
+  sudo docker build -t app  .
+  sudo docker run -d -p 80:80 --restart always  app 
+}
+
+
+echo " ********** Depolyment Start ***************8"
+if ! gitclone; then                           ---> handling the error 
+    cd nginx-image
+fi
+
+
+depoly_code
+
+
+echo " ################ Deployment Completed ################"
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+AWK Command: 
+
+1. To print the specific line --> aws "{print $2,$4}" <file_name> 
+2. To see the file name only  --> awk '{print $NF}' --> last cloumn/ file name 
+3. To print data with condtion --> awk "{if ($3>4000) print $0}" <file_name>  --> $2,$3,$4 are the column name
+4. To print specifi data from file --> awk "/india/ {print $0}"  <file_name> 
+5. To print range of line --> awk "NR=="7" , NR=="8" {print $0}" <file_name>
+6. Toprint data with loop statement-->awk "BEGIN {while(i<10){i++; print "number is " i}}'
+7. 
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+SED Command: 
+
+  It is use for text manipulation , such as searching, replacing, inserting, and deleting lines in a file or input stream.
+
+  Basic Syntax --> sed [OPTIONS] 'COMMAND' file
+
+
+1. To print the specific line from file --> sed -n '3,5p' <file_name> ( line print 3 to 5 ) , sed -n '$p' <file_name> (for last line) , 
+
+2. To fing the specific data from file --> sed -n '/mau/p' <file_name> (to find specifi data from file) , 
+sed -n -e '/India/p' -e '/Germeny/p' <fime_name> ( to print mulitple  specification  data with expression ) , 
+
+3. Replace the word in file --> sed "s/pal/paul/g" <file_name> ( to change the word in file) , 
+sed "2 s/India/USA/g" <file_name> (to change the specifi line )
+
+4. Replace by name  anywhere in file  --> sed "/pal/ s/India/USA/g" <file_name> , 
+
+5. To delete the line --> sed '1d' <file_name> , sed '/India/d' <file_name> (delete the data of specific word from file) , sed "5d" <file_name> . 
+
+6. To delete the blank space --> sed '/^$/d' <file_name>
+
+7. To store the data in file --> sed "/India/ w <new_file_name>" <file_name> 
+
+8. To add the specific linux command in file --> sed " 2 e data" <file_name> (add the data output in second line.)
+
+9. find out the name form the file --> sed -n "/^K/p" <file_name> , sed -n "/[AC]/p" <file_name> (to print the letter start from A and C) , sed -n "/[A-D]/p" <file_name> (to find the word in range A to D). 
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Find Command: The find command is used to search for files and directories based on different criteria like name, size, type, permissions, and modification time.
+Sytanx:   find [starting-path] [options] [expression]
+    
+1. To find the size of file -->   find / -size 40M
+2. find the file and directory  -->   find /home/flper -type {f,d,l,b,s}
+3. find by name  -->  find / -name <file_name> , to ignore case sensitive:  find / -iname  <file_name> 
+4. find the file by user  -->   find / -user <user_name> 
+5. To fing the empty file in document  -->   find /home/fluper/sh  -empty  
+6. To find the old day file   --> find . -mtime 3 
+
+
+
